@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
-export default function Layout({ children, currentPageName }: { children?: React.ReactNode, currentPageName?: string }) {
+export default function Layout({ children }: { children?: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-black text-green-400 font-mono overflow-x-hidden">
       <div className="fixed inset-0 z-0 opacity-10">

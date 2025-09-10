@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Terminal, Download, Mail, Database, Server } from 'lucide-react'
 
@@ -24,7 +24,7 @@ export default function TerminalHero(){
   const [displayedCode, setDisplayedCode] = useState<string[]>([''])
   const [currentLine, setCurrentLine] = useState(0)
   const [currentChar, setCurrentChar] = useState(0)
-  const [isTyping, setIsTyping] = useState(true)
+  const [isTyping] = useState(true)
 
   useEffect(() => {
     if (!isTyping || currentLine >= codeLines.length) return

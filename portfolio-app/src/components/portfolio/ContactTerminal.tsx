@@ -26,7 +26,7 @@ const contactCommands = [
 export default function ContactTerminal(){
   const [displayedLines, setDisplayedLines] = useState<string[]>([])
   const [currentLine, setCurrentLine] = useState(0)
-  const [isTyping, setIsTyping] = useState(true)
+  const [isTyping] = useState(true)
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
 
   useEffect(() => {

@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Github, ExternalLink } from 'lucide-react'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 
 const projects = [
   {
@@ -50,9 +53,9 @@ export default function ProjectsShowcase(){
 
       <div className="flex flex-wrap justify-center gap-4 mb-12">
         {categories.map(category => (
-          <button key={category} onClick={() => setActiveFilter(category)} className={`${activeFilter === category ? 'bg-green-600 text-black glow-border' : 'border-gray-600 text-gray-400 hover:border-green-400 hover:text-green-400'} border px-4 py-2 rounded`}>
+          <Button key={category} variant={activeFilter === category ? 'default' : 'outline'} onClick={() => setActiveFilter(category)}>
             {category}
-          </button>
+          </Button>
         ))}
       </div>
 
@@ -60,20 +63,20 @@ export default function ProjectsShowcase(){
         <AnimatePresence mode="wait">
           {filteredProjects.map((project, index) => (
             <motion.div key={project.id} layout initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} transition={{ delay: index * 0.1 }} whileHover={{ y: -10 }}>
-              <div className="bg-black/60 border border-gray-700 hover:border-green-400/50 transition-all duration-500 project-card cursor-pointer group overflow-hidden rounded" onClick={() => setSelectedProject(project)}>
+              <Card className="hover:border-green-400/50 transition-all duration-500 project-card cursor-pointer group overflow-hidden" onClick={() => setSelectedProject(project)}>
                 <div className="relative h-48 overflow-hidden">
                   <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  <span className="absolute top-4 right-4 bg-green-600 text-black px-2 py-1 rounded text-xs">{project.category}</span>
+                  <Badge className="absolute top-4 right-4">{project.category}</Badge>
                 </div>
-                <div className="p-6 pb-4">
+                <CardHeader className="p-6 pb-4">
                   <h3 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors">{project.title}</h3>
                   <p className="text-gray-400 text-sm">{project.description}</p>
-                </div>
-                <div className="p-6 pt-0">
+                </CardHeader>
+                <CardContent className="p-6 pt-0">
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.slice(0, 4).map(tech => (<span key={tech} className="text-xs border border-gray-600 text-gray-300 px-2 py-1 rounded">{tech}</span>))}
-                    {project.tech.length > 4 && (<span className="text-xs border border-gray-600 text-gray-300 px-2 py-1 rounded">+{project.tech.length - 4} more</span>)}
+                    {project.tech.slice(0, 4).map(tech => (<Badge key={tech} variant="outline" className="text-xs border-gray-600 text-gray-300">{tech}</Badge>))}
+                    {project.tech.length > 4 && (<Badge variant="outline" className="text-xs border-gray-600 text-gray-300">+{project.tech.length - 4} more</Badge>)}
                   </div>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     {Object.entries(project.metrics).slice(0, 2).map(([key, value]) => (
@@ -83,8 +86,8 @@ export default function ProjectsShowcase(){
                       </div>
                     ))}
                   </div>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             </motion.div>
           ))}
         </AnimatePresence>

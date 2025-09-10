@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import TerminalHero from '@/components/portfolio/TerminalHero'
 import TechStack from '@/components/portfolio/TechStack'
@@ -21,11 +21,11 @@ export default function Portfolio(){
 
   return (
     <div className="min-h-screen bg-black text-green-400">
-      <section id="hero" ref={el => (sectionRefs.current.hero = el)} className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <section id="hero" ref={(el) => { sectionRefs.current.hero = el }} className="min-h-screen flex items-center justify-center relative overflow-hidden">
         <TerminalHero />
       </section>
 
-      <section id="about" ref={el => (sectionRefs.current.about = el)} className="py-20 px-6">
+      <section id="about" ref={(el) => { sectionRefs.current.about = el }} className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-bold mb-6 glow-text">$ cat about_me.txt</h2>
@@ -36,19 +36,19 @@ export default function Portfolio(){
         </div>
       </section>
 
-      <section id="skills" ref={el => (sectionRefs.current.skills = el)} className="py-20 px-6 bg-gradient-to-b from-black via-gray-900 to-black">
+      <section id="skills" ref={(el) => { sectionRefs.current.skills = el }} className="py-20 px-6 bg-gradient-to-b from-black via-gray-900 to-black">
         <TechStack />
       </section>
 
-      <section id="projects" ref={el => (sectionRefs.current.projects = el)} className="py-20 px-6">
+      <section id="projects" ref={(el) => { sectionRefs.current.projects = el }} className="py-20 px-6">
         <ProjectsShowcase />
       </section>
 
-      <section id="experience" ref={el => (sectionRefs.current.experience = el)} className="py-20 px-6 bg-gradient-to-b from-black via-gray-900 to-black">
+      <section id="experience" ref={(el) => { sectionRefs.current.experience = el }} className="py-20 px-6 bg-gradient-to-b from-black via-gray-900 to-black">
         <ExperienceTimeline />
       </section>
 
-      <section id="contact" ref={el => (sectionRefs.current.contact = el)} className="py-20 px-6">
+      <section id="contact" ref={(el) => { sectionRefs.current.contact = el }} className="py-20 px-6">
         <ContactTerminal />
       </section>
 
