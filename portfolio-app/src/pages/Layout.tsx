@@ -15,9 +15,16 @@ export default function Layout({ children, currentPageName }: { children?: React
               &lt;DevPortfolio/&gt;
             </div>
             <div className="hidden md:flex space-x-8">
-              {['Portfolio', 'About', 'Skills', 'Projects', 'Contact'].map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} className="text-gray-300 hover:text-green-400 transition-all duration-300 hover:glow-text">
-                  {item}
+              {[
+                { label: 'Home', href: '#hero' },
+                { label: 'About', href: '#about' },
+                { label: 'Skills', href: '#skills' },
+                { label: 'Projects', href: '#projects' },
+                { label: 'Experience', href: '#experience' },
+                { label: 'Contact', href: '#contact' },
+              ].map((link) => (
+                <a key={link.label} href={link.href} className="text-gray-300 hover:text-green-400 transition-all duration-300 hover:glow-text">
+                  {link.label}
                 </a>
               ))}
             </div>
