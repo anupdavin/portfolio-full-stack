@@ -5,7 +5,7 @@ import './index.css'
 import Portfolio from './pages/Portfolio.tsx'
 import Layout from './pages/Layout.tsx'
 
-const routes = [
+const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
@@ -13,8 +13,7 @@ const routes = [
       { index: true, element: <Portfolio /> },
     ],
   },
-]
-const router = createBrowserRouter(routes, { basename: import.meta.env.BASE_URL })
+])
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
