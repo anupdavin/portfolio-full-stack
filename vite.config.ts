@@ -8,6 +8,9 @@ export default defineConfig({
   base: process.env.GITHUB_REPOSITORY
     ? `/${process.env.GITHUB_REPOSITORY.split('/')[1]}/`
     : '/',
+  build: {
+    outDir: 'docs'
+  },
   resolve: {
     alias: {
       '@': '/src',
