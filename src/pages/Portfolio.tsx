@@ -52,7 +52,7 @@ export default function Portfolio(){
         <ContactTerminal />
       </section>
 
-      <div className="fixed bottom-8 right-8 z-50 flex flex-col gap-4">
+      <div className="fixed bottom-24 right-8 z-50 flex flex-col gap-4">
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
           <a className="w-12 h-12 rounded-full bg-green-600 hover:bg-green-500 glow-border grid place-items-center" href="https://github.com/" target="_blank" rel="noreferrer">
             <Github className="w-5 h-5" />
