@@ -1,5 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import ChatWidget from '@/components/ChatWidget'
 
 export default function Layout({ children }: { children?: React.ReactNode }) {
   return (
@@ -37,6 +38,9 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
         {children}
         <Outlet />
       </main>
+
+      {/* Chatbot */}
+      <ChatWidget />
 
       <style>{`
         .glow-text { text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor; }
