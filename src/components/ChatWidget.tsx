@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { rankBySimilarity } from '@/lib/embeddings'
 import { generateAnswer } from '@/lib/generator'
 import type { ChatDoc } from '@/chat/index.d'
