@@ -2,7 +2,7 @@ import http from 'node:http'
 import fs from 'node:fs'
 import path from 'node:path'
 
-const distDir = path.resolve('./dist')
+const distDir = path.resolve('./docs')
 
 const server = http.createServer((req, res) => {
   const urlPath = req.url && req.url !== '/' ? req.url.split('?')[0] : '/index.html'
@@ -25,6 +25,6 @@ const server = http.createServer((req, res) => {
 
 const port = process.env.PORT ? Number(process.env.PORT) : 5173
 server.listen(port, '0.0.0.0', () => {
-  console.log(`Serving dist on http://localhost:${port}`)
+  console.log(`Serving docs on http://localhost:${port}`)
 })
 
