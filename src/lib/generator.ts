@@ -14,12 +14,12 @@ export async function loadGenerator() {
 export async function generateAnswer(prompt: string, opts?: { maxNewTokens?: number }) {
   const pipe = await loadGenerator()
   const out = await pipe(prompt, {
-    max_new_tokens: opts?.maxNewTokens ?? 128,
-    temperature: 0.7,
-    repetition_penalty: 1.2,
+    max_new_tokens: opts?.maxNewTokens ?? 60,
+    temperature: 0.2,
+    repetition_penalty: 1.3,
     do_sample: true,
-    top_k: 50,
-    top_p: 0.95,
+    top_k: 40,
+    top_p: 0.9,
   })
   const text = Array.isArray(out) ? out[0]?.generated_text ?? '' : String(out)
   return text

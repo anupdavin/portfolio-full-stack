@@ -5,12 +5,23 @@ import type { ChatDoc } from '@/chat/index.d'
 
 type Message = { role: 'user' | 'assistant' | 'system'; content: string }
 
+const FAQ: Record<string, string> = {
+  'what is his name': 'Anup Davin Mathivanan.',
+  "what's his name": 'Anup Davin Mathivanan.',
+  'who is he': 'Anup Davin Mathivanan is a Senior Full‑Stack Java/DevOps engineer.',
+}
+
+function safetyFilter(s: string): boolean {
+  const forbidden = [/email/i, /phone/i, /whatsapp/i, /credit/i, /password/i]
+  return !forbidden.some((re) => re.test(s))
+}
+
 export default function ChatWidget() {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: 'Hi! Ask me about Anup’s experience, projects, or skills.' },
+    { role: 'assistant', content: 'Hi! Ask about Anup’s experience, projects, or skills.' },
   ])
   const [docs, setDocs] = useState<ChatDoc[] | null>(null)
   const panelRef = useRef<HTMLDivElement>(null)
@@ -30,6 +41,10 @@ export default function ChatWidget() {
     }
   }, [messages, open])
 
+  function normalize(q: string) {
+    return q.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim()
+  }
+
   async function onSend() {
     const q = input.trim()
     if (!q) return
@@ -37,17 +52,39 @@ export default function ChatWidget() {
     setMessages((m) => [...m, { role: 'user', content: q }])
     setLoading(true)
     try {
+      const norm = normalize(q)
+      if (FAQ[norm]) {
+        setMessages((m) => [...m, { role: 'assistant', content: FAQ[norm] }])
+        return
+      }
+
       const top = docs && docs.length ? await rankBySimilarity(q, docs, 4) : []
       const context = top
         .map((t, i) => `[#${i + 1}] ${t.title}${t.url ? ` (${t.url})` : ''}\n${t.text}`)
         .join('\n\n')
 
-      const system =
-        'You are an assistant for a personal portfolio site. Answer briefly and professionally, grounded ONLY in the provided CONTEXT. If not in context, say you do not know.'
+      const system = [
+        'You are an assistant for a personal portfolio site.',
+        'Only answer from CONTEXT. If the answer is not in CONTEXT, reply: "I don’t know."',
+        'Be concise and professional. Do not request contact information or personal data.',
+        'If asked for the person’s name, reply exactly: "Anup Davin Mathivanan."',
+      ].join(' ')
+
       const prompt = `${system}\n\nCONTEXT:\n${context || '(none)'}\n\nUSER: ${q}\nASSISTANT:`
-      const completion = await generateAnswer(prompt, { maxNewTokens: 128 })
-      const answer = completion.replace(/^[\s\S]*ASSISTANT:\s*/i, '').trim()
-      setMessages((m) => [...m, { role: 'assistant', content: answer || '(No answer generated)'}])
+      let completion = await generateAnswer(prompt, { maxNewTokens: 60 })
+      let answer = completion.replace(/^[\s\S]*ASSISTANT:\s*/i, '').trim()
+
+      if (!safetyFilter(answer)) {
+        answer = 'I can’t help with that. Please ask about experience, projects, or skills.'
+      }
+
+      if (!answer || /i don.?t know/i.test(answer)) {
+        // Try to extract a fact from context for fallback
+        const nameHit = top.find((d) => /Anup Davin Mathivanan/i.test(d.text))
+        if (/name/i.test(q) && nameHit) answer = 'Anup Davin Mathivanan.'
+      }
+
+      setMessages((m) => [...m, { role: 'assistant', content: answer || 'I don’t know.' }])
     } catch (e) {
       setMessages((m) => [...m, { role: 'assistant', content: 'Sorry, I ran into an issue. Please try again.' }])
     } finally {
