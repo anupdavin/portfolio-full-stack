@@ -96,13 +96,13 @@ export default function ChatWidget() {
     <div>
       <button
         onClick={() => setOpen((v) => !v)}
-        className="fixed bottom-6 right-6 z-40 rounded-full px-4 py-3 bg-green-600 text-black font-bold shadow-lg hover:bg-green-500"
+        className="fixed bottom-6 right-24 z-40 rounded-full px-4 py-3 bg-green-600 text-black font-bold shadow-lg hover:bg-green-500"
       >
         {open ? 'Close Chat' : 'Chat'}
       </button>
 
       {open && (
-        <div className="fixed bottom-24 right-6 z-40 w-[360px] max-w-[90vw] rounded-xl border border-green-400/30 bg-black/85 backdrop-blur p-3 text-green-300 shadow-xl">
+        <div className="fixed bottom-24 right-24 z-40 w-[360px] max-w-[90vw] rounded-xl border border-green-400/30 bg-black/85 backdrop-blur p-3 text-green-300 shadow-xl">
           <div className="text-sm font-bold text-green-400 pb-2 border-b border-green-400/20">Portfolio Chat</div>
           <div ref={panelRef} className="mt-2 h-64 overflow-y-auto pr-1 space-y-2">
             {messages.map((m, i) => (
