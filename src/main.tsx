@@ -13,7 +13,7 @@ const router = createBrowserRouter([
       { index: true, element: <Portfolio /> },
     ],
   },
-])
+], { basename: import.meta.env.BASE_URL })
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
