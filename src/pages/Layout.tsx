@@ -55,6 +55,15 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
         .code-block { background: rgba(0,0,0,.8); border: 1px solid rgba(34,197,94,.3); backdrop-filter: blur(10px); }
         @keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
         .floating-element { animation: float 6s ease-in-out infinite; }
+        
+        /* Hide scrollbar but keep functionality */
+        * {
+          scrollbar-width: none; /* Firefox */
+          -ms-overflow-style: none; /* IE and Edge */
+        }
+        *::-webkit-scrollbar {
+          display: none; /* Chrome, Safari, Opera */
+        }
       `}</style>
     </div>
   )
