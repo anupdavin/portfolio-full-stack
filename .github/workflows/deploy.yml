@@ -32,11 +32,11 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          GITHUB_ACTIONS: true
 
-      - name: Add SPA fallback and nojekyll
-        run: |
-          cp docs/index.html docs/404.html
-          touch docs/.nojekyll
+      - name: Create 404.html for SPA routing
+        run: cp docs/index.html docs/404.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
