@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import { Building2, MapPin, Calendar, TrendingUp, Users, DollarSign, Zap } from 'lucide-react'
 
 const experiences = [
@@ -59,7 +59,7 @@ const experiences = [
 ]
 
 // Animation variants
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -67,7 +67,7 @@ const containerVariants = {
   }
 }
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, x: -50, scale: 0.95 },
   visible: { 
     opacity: 1, 
@@ -77,7 +77,7 @@ const cardVariants = {
   }
 }
 
-const metricVariants = {
+const metricVariants: Variants = {
   hidden: { opacity: 0, scale: 0, y: 20 },
   visible: (i: number) => ({
     opacity: 1,
@@ -87,7 +87,7 @@ const metricVariants = {
   })
 }
 
-const techVariants = {
+const techVariants: Variants = {
   hidden: { opacity: 0, x: -10 },
   visible: (i: number) => ({
     opacity: 1,

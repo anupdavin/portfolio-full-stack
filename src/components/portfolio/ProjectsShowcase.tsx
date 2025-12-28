@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, type Variants } from 'framer-motion'
 import { Github, ExternalLink, MessageCircle, Zap, TrendingUp, Shield, Clock } from 'lucide-react'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -84,7 +84,7 @@ export default function ProjectsShowcase(){
   const filteredProjects = activeFilter === 'All' ? projects : projects.filter(p => p.category === activeFilter)
 
   // Animation variants for staggered tech stack
-  const techStackVariants = {
+  const techStackVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -92,7 +92,7 @@ export default function ProjectsShowcase(){
     }
   }
   
-  const techItemVariants = {
+  const techItemVariants: Variants = {
     hidden: { opacity: 0, scale: 0.8, y: 10 },
     visible: { 
       opacity: 1, 
@@ -102,7 +102,7 @@ export default function ProjectsShowcase(){
     }
   }
 
-  const metricVariants = {
+  const metricVariants: Variants = {
     hidden: { opacity: 0, scale: 0.5 },
     visible: (i: number) => ({
       opacity: 1,
