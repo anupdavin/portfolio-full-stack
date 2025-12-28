@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Github, ExternalLink, MessageCircle, Zap, TrendingUp, Shield, Clock, Users } from 'lucide-react'
+import { Github, ExternalLink, MessageCircle, Zap, TrendingUp, Shield, Clock } from 'lucide-react'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -159,7 +159,7 @@ export default function ProjectsShowcase(){
                     whileInView="visible"
                     viewport={{ once: true }}
                   >
-                    {project.tech.slice(0, 4).map((tech, i) => (
+                    {project.tech.slice(0, 4).map((tech) => (
                       <motion.div key={tech} variants={techItemVariants}>
                         <Badge 
                           variant="outline" 
@@ -365,7 +365,7 @@ export default function ProjectsShowcase(){
                       initial="hidden"
                       animate="visible"
                     >
-                      {selectedProject.tech.map((tech: string, i: number) => (
+                      {selectedProject.tech.map((tech: string) => (
                         <motion.span 
                           key={tech}
                           variants={techItemVariants}

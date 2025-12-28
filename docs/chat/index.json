@@ -2,25 +2,25 @@
   {
     "id": "about-anup",
     "title": "About Anup Davin Mathivanan",
-    "text": "Anup Davin Mathivanan is a Senior Full-Stack Java Developer with 8+ years of experience specializing in Enterprise Architecture, Cloud Solutions, and DevOps. He is based in Singapore/India and is available for new opportunities. His expertise includes Spring Boot, Microservices, React, AWS, Docker, and Kubernetes. He has deployed 50+ projects and written over 1 million lines of code.",
+    "text": "Anup Davin Mathivanan is a Senior Full-Stack Java Architect with 8+ years of experience specializing in Enterprise Architecture, Cloud Solutions, and DevOps. He is based in Singapore/India and is actively available for new projects. His expertise includes Spring Boot, Microservices, React, AWS, Docker, and Kubernetes. He has deployed 50+ projects and written over 1 million lines of production code. Anup helps companies scale their backend systems, migrate to microservices, and optimize performance.",
     "url": "#about"
   },
   {
     "id": "backend-skills",
     "title": "Backend Development Skills",
-    "text": "Anup excels in Java development with 95% proficiency, Spring Boot (90%), Spring Security (85%), Hibernate/JPA (88%), and Maven/Gradle (82%). He specializes in enterprise applications, RESTful APIs, microservices architecture, OAuth2, JWT authentication systems, ORM mapping, and database optimization. His backend expertise includes building scalable applications with clean, maintainable code.",
+    "text": "Anup excels in Java development with 95% proficiency, Spring Boot (90%), Spring Security (85%), Hibernate/JPA (88%), and Maven/Gradle (82%). He specializes in enterprise applications, RESTful APIs, microservices architecture, OAuth2, JWT authentication systems, ORM mapping, and database optimization. His backend expertise includes building scalable applications handling 100K+ daily transactions.",
     "url": "#skills"
   },
   {
     "id": "database-expertise",
     "title": "Database Technologies",
-    "text": "Anup has strong database skills including Oracle (88%), MySQL (85%), PostgreSQL (80%), MongoDB (78%), and Redis (80%). He specializes in PL/SQL, performance tuning, CRUD operations, stored procedures, advanced SQL, indexing, NoSQL document-based storage, caching, and session management.",
+    "text": "Anup has strong database skills including Oracle (88%), MySQL (85%), PostgreSQL (80%), MongoDB (78%), and Redis (80%). He specializes in PL/SQL, performance tuning, CRUD operations, stored procedures, advanced SQL, indexing, NoSQL document-based storage, caching, and session management. He has optimized databases handling 50M+ records.",
     "url": "#skills"
   },
   {
     "id": "cloud-devops",
     "title": "Cloud & DevOps Skills",
-    "text": "Anup is proficient in AWS (88%), Docker (85%), Kubernetes (75%), Jenkins (80%), and Terraform (70%). His cloud expertise includes EC2, S3, RDS, IAM, containerization, microservices deployment, orchestration, scaling, CI/CD pipelines, and Infrastructure as Code.",
+    "text": "Anup is proficient in AWS (88%), Docker (85%), Kubernetes (75%), Jenkins (80%), and Terraform (70%). His cloud expertise includes EC2, S3, RDS, IAM, containerization, microservices deployment, orchestration, scaling, CI/CD pipelines, and Infrastructure as Code. He has reduced deployment times by 80% through DevOps automation.",
     "url": "#skills"
   },
   {
@@ -32,43 +32,61 @@
   {
     "id": "ecommerce-project",
     "title": "E-Commerce Microservices Platform",
-    "text": "Anup built a scalable microservices architecture handling 100K+ daily transactions. The project involved decomposing a legacy monolith into 12 microservices with event-driven architecture. Key technologies: Spring Boot, Docker, Kubernetes, PostgreSQL, Redis, AWS. Results: 99.9% uptime, 60% faster response times, 40% cost reduction. The platform processes 10K RPS with sub-200ms response times.",
+    "text": "Anup built a scalable microservices architecture handling 100K+ daily transactions. The project involved decomposing a legacy monolith into 12 microservices with event-driven architecture. Key technologies: Spring Boot, Docker, Kubernetes, PostgreSQL, Redis, AWS. Results: 99.9% uptime, 60% faster response times, 40% cost reduction. The platform processes 10K RPS with sub-200ms response times. This project is ideal for e-commerce and retail clients facing scaling challenges.",
     "url": "#projects"
   },
   {
     "id": "analytics-dashboard",
     "title": "Real-time Analytics Dashboard",
-    "text": "Anup developed a high-performance analytics system processing 1M+ events per minute. Built with Spring WebFlux, Apache Kafka, InfluxDB, React, and D3.js. The event-driven architecture with reactive streams achieved sub-second analytics and 95% reduction in data latency. The system handles 50B+ data points for 10K+ users.",
+    "text": "Anup developed a high-performance analytics system processing 1M+ events per minute. Built with Spring WebFlux, Apache Kafka, InfluxDB, React, and D3.js. The event-driven architecture with reactive streams achieved sub-second analytics and 95% reduction in data latency. The system handles 50B+ data points for 10K+ users. This project demonstrates expertise for data-driven enterprises needing real-time insights.",
+    "url": "#projects"
+  },
+  {
+    "id": "payment-gateway",
+    "title": "Payment Gateway Integration",
+    "text": "Anup built a secure payment processing system handling $5M+ daily transactions. The PCI-DSS compliant infrastructure includes multi-layer security, real-time fraud detection blocking $2M+ in fraudulent transactions, and automated reconciliation. Achieved 99.99% transaction success rate with zero security incidents. Ideal for BFSI and fintech clients.",
     "url": "#projects"
   },
   {
     "id": "experience-stats",
     "title": "Professional Experience",
-    "text": "Anup has 8+ years of experience in full-stack development. He has deployed 50+ projects in production, written over 1 million lines of code, and has extensive experience with enterprise applications, microservices, cloud infrastructure, and performance optimization. He is passionate about building scalable solutions with clean, maintainable code.",
+    "text": "Anup has 8+ years of experience in full-stack development. He has deployed 50+ projects in production, written over 1 million lines of code, and achieved 100% client satisfaction. His enterprise experience spans BFSI, e-commerce, logistics, and Fortune 500 companies. He has led teams of 12+ developers and delivered $2M+ in cost savings.",
     "url": "#hero"
   },
   {
     "id": "location-availability",
     "title": "Location and Availability",
-    "text": "Anup Davin Mathivanan is currently based in Singapore/India and is available for new opportunities. He is actively looking for senior full-stack developer positions and is open to remote work opportunities.",
-    "url": "#hero"
+    "text": "Anup Davin Mathivanan is based in Singapore (GMT+8) and India (GMT+5:30). He is fully available for remote work and maintains 4+ hours overlap with US/EU timezones. He can start new projects within 2 weeks and currently has capacity for 2-3 projects per quarter. He uses async communication with scheduled syncs for effective remote collaboration.",
+    "url": "#contact"
+  },
+  {
+    "id": "engagement-models",
+    "title": "Engagement Models and Pricing",
+    "text": "Anup offers three engagement models: (1) Project-based: fixed scope and timeline for specific deliverables, (2) Retainer: ongoing support and development for continuous improvement, (3) Consulting: architecture review, code audit, and optimization recommendations. Pricing is competitive for enterprise Java projects and depends on scope. Contact Anup to discuss your specific requirements and get a custom quote.",
+    "url": "#contact"
+  },
+  {
+    "id": "timezone-remote",
+    "title": "Timezone and Remote Work",
+    "text": "Anup works remotely from Singapore/India and has successfully delivered projects for clients across different timezones including US, EU, and APAC. He offers flexible scheduling with 4+ hours overlap for real-time collaboration. Communication happens via Slack, Teams, or email with regular video syncs. Response time is typically within 24 hours, with proposals delivered in 48-72 hours.",
+    "url": "#contact"
   },
   {
     "id": "contact-info",
     "title": "Contact Information",
-    "text": "You can contact Anup through the contact section of his portfolio. He is available for new opportunities and open to discussing potential projects, collaborations, or job opportunities. His portfolio includes a contact terminal interface for reaching out.",
+    "text": "Best ways to reach Anup: (1) WhatsApp: +65 8398 5072 for fastest response, (2) Email: davinanup@gmail.com for detailed inquiries, (3) LinkedIn: linkedin.com/in/anup-davin-mathivanan. He responds within 24 hours and can schedule calls via Calendly. The portfolio contact form also works for project inquiries.",
     "url": "#contact"
   },
   {
-    "id": "resume-download",
-    "title": "Resume and Portfolio",
-    "text": "Anup's resume is available for download from his portfolio. The portfolio showcases his technical skills, projects, experience, and achievements. It includes detailed information about his technology stack, project implementations, and professional background.",
-    "url": "#hero"
+    "id": "industries-clients",
+    "title": "Industries and Client Types",
+    "text": "Anup works with both startups and enterprises, adapting his approach to fit team size, budget, and growth stage. Industry experience includes: BFSI (banking, insurance, fintech), E-Commerce and retail, Logistics and SaaS platforms, Fortune 500 enterprises. He has delivered projects for NTT Data, Great Eastern Insurance, ClickShip, and other leading companies.",
+    "url": "#experience"
   },
   {
     "id": "coding-philosophy",
     "title": "Coding Philosophy",
-    "text": "Anup believes in writing clean, maintainable code and building scalable solutions. His approach focuses on performance optimization, proper architecture design, and following best practices. He is passionate about continuous learning and staying updated with the latest technologies in the Java ecosystem and cloud computing.",
+    "text": "Anup believes in writing clean, maintainable code and building scalable solutions. His approach focuses on performance optimization, proper architecture design, test-driven development, and following best practices. He is passionate about continuous learning and staying updated with the latest technologies in the Java ecosystem and cloud computing. Every solution is designed for long-term maintainability.",
     "url": "#about"
   }
 ]

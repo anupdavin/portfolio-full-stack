@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { rankBySimilarity } from '@/lib/embeddings'
 import { generateAnswer } from '@/lib/generator'
 import type { ChatDoc } from '@/chat/index.d'
-import { MessageCircle, X, Send, Bot, User, Loader2, Sparkles, Clock, Zap } from 'lucide-react'
+import { MessageCircle, X, Send, Bot, User, Sparkles, Clock, Zap } from 'lucide-react'
 
 type Message = { role: 'user' | 'assistant' | 'system'; content: string; timestamp?: Date }
 

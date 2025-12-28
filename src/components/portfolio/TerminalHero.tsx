@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Terminal, Download, Mail, Database, Server, MessageCircle, CheckCircle, TrendingUp, Shield } from 'lucide-react'
+import { Terminal, Download, Database, Server, MessageCircle, CheckCircle, TrendingUp, Shield } from 'lucide-react'
 
 const codeLines = [
   'public class FullStackDeveloper {',
