@@ -1,0 +1,68 @@
+[
+  {
+    "id": "identity",
+    "title": "Anup Davin Mathivanan",
+    "text": "Anup Davin Mathivanan is a Principal AI-Native Platform Architect and Staff Software Engineer focused on modern Java, data and master data management, cloud platforms, distributed systems, and AI-augmented delivery. He is based in Singapore with India ties and is remote-ready.",
+    "url": "#hero"
+  },
+  {
+    "id": "capabilities",
+    "title": "Capability map",
+    "text": "The public capability tracks are AI-native delivery, platform engineering, data and MDM, distributed systems, and enterprise delivery. Evidence includes RAG and evaluation patterns, Java and Kubernetes modernization, TIBCO EBX and Boomi DataHub contexts, Kafka and CDC workflows, and regulated delivery controls.",
+    "url": "#skills"
+  },
+  {
+    "id": "about",
+    "title": "Working approach",
+    "text": "Anup treats AI augmentation as an engineering surface that needs retrieval boundaries, source traceability, evaluation cases, observability, permissioned tools, and human review. He prefers evidence before hype and local-first verification before a change is pushed.",
+    "url": "#about"
+  },
+  {
+    "id": "mdm-modernization",
+    "title": "Person MDM modernization",
+    "text": "This sanitized enterprise case study describes a migration path from legacy EBX, JBoss, and JDK 8 operations toward containerized EBX delivery on JDK 21 and Kubernetes. The focus is runtime compatibility, Jakarta migration, dependency governance, readiness checks, security gates, and safe sequencing. Employer and client details are intentionally omitted.",
+    "url": "#projects"
+  },
+  {
+    "id": "rag-knowledge-assistant",
+    "title": "Grounded knowledge assistant",
+    "text": "This portfolio lab demonstrates a retrieval-first assistant pattern with citations, explicit no-answer behavior, prompt-injection cases, evaluation fixtures, and a deterministic local default. It is an illustrative implementation and is not presented as a production client deployment.",
+    "url": "#projects"
+  },
+  {
+    "id": "agent-augmented-engineering",
+    "title": "Agent-augmented engineering loop",
+    "text": "This sanitized delivery practice uses GitHub Copilot, Claude Code, Codex, MCP, tests, security review, and human approval as a bounded workflow. The goal is faster exploration and clearer handoffs without exposing credentials, private prompts, client data, or unverifiable automation claims.",
+    "url": "#projects"
+  },
+  {
+    "id": "event-driven-reconciliation",
+    "title": "Event-driven reconciliation",
+    "text": "This distributed-systems evidence record covers Kafka, CDC, outbox, idempotency, replay, and saga recovery patterns. Documented project evidence reduced a multi-hour reconciliation process to under 20 minutes; topology and client identifiers remain sanitized.",
+    "url": "#projects"
+  },
+  {
+    "id": "ai-engineering-lab",
+    "title": "AI Engineering Lab",
+    "text": "The AI Engineering Lab is a local simulation of retrieve, augment, and evaluate. It demonstrates source attachment, an explicit no-answer path, a read-only mock boundary, and offline-first behavior. No provider key, GitHub account, email account, or private enterprise system is connected.",
+    "url": "#ai-lab"
+  },
+  {
+    "id": "experience",
+    "title": "Experience summary",
+    "text": "Anup brings 9+ years of enterprise engineering experience and has modernized five legacy systems according to the portfolio evidence model. His work spans Java services, MDM, cloud-native deployment, event-driven integration, regulated payment and insurance contexts, logistics, and platform modernization.",
+    "url": "#experience"
+  },
+  {
+    "id": "availability",
+    "title": "Availability and working style",
+    "text": "Anup is open to selective principal and staff opportunities and architecture engagements. He is remote-ready and async-friendly, with deliberate review points. The best next step is to discuss the desired outcome, constraints, and evidence needed before selecting an engagement shape.",
+    "url": "#contact"
+  },
+  {
+    "id": "contact",
+    "title": "Contact Anup",
+    "text": "For a detailed inquiry, email davinanup@gmail.com or use the portfolio contact form, which opens a draft in the visitor's email client. WhatsApp is available for a quick conversation. This page does not claim delivery for messages it cannot send.",
+    "url": "#contact"
+  }
+]
