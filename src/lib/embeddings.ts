@@ -1,10 +1,13 @@
-// Lightweight client-side embeddings using transformers.js (Xenova)
-// Model: all-MiniLM-L6-v2
-// Note: Lazy-import to avoid initial bundle bloat
+// Lightweight client-side embeddings using transformers.js (Xenova).
+// Model: all-MiniLM-L6-v2. Lazy-imported to avoid initial bundle bloat.
 
 export type EmbeddingVector = Float32Array | number[]
 
-let embedder: any | null = null
+type EmbeddingOptions = { pooling: 'mean'; normalize: true }
+type EmbeddingOutput = { data: Float32Array }
+type FeatureExtractor = (text: string, options: EmbeddingOptions) => Promise<EmbeddingOutput>
+
+let embedder: FeatureExtractor | null = null
 
 export async function loadEmbedder() {
   if (embedder) return embedder
@@ -12,7 +15,7 @@ export async function loadEmbedder() {
   const { pipeline } = await import('@xenova/transformers')
   embedder = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2', {
     quantized: true,
-  })
+  }) as unknown as FeatureExtractor
   return embedder
 }
 
@@ -57,4 +60,3 @@ export async function rankBySimilarity(
   scored.sort((a, b) => b.score - a.score)
   return scored.slice(0, topK)
 }
-

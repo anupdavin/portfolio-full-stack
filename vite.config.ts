@@ -1,13 +1,16 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+const localSandbox = process.env.LOCAL_SANDBOX === 'true'
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  // Always use /portfolio-full-stack/ for GitHub Pages deployment
-  base: '/portfolio-full-stack/',
+  // Keep production aligned with GitHub Pages while making local verification
+  // behave like a normal root-mounted application.
+  base: localSandbox ? '/' : '/portfolio-full-stack/',
   build: {
-    outDir: 'docs'
+    outDir: localSandbox ? '.local-sandbox/dist' : 'docs'
   },
   resolve: {
     alias: {

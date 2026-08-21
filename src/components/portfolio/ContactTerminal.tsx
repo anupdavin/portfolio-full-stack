@@ -1,29 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Phone, Linkedin, MessageCircle, Calendar, Clock, CheckCircle, Zap, Globe } from 'lucide-react'
+import { portfolioContent } from '@/content/portfolio'
 
 const contactCommands = [
   'anup@portfolio:~$ contact --info',
-  '> Email: davinanup@gmail.com',
-  '> Phone: +65 8398 5072 / +91 95004 99143',
-  '> Location: Singapore / India (GMT+8 / GMT+5:30)',
+  `> Email: ${portfolioContent.contact.email}`,
+  `> Phone: ${portfolioContent.contact.singaporePhone} / ${portfolioContent.contact.indiaPhone}`,
+  `> Location: ${portfolioContent.identity.location}`,
   '> LinkedIn: linkedin.com/in/anup-davin-mathivanan',
   '',
   'anup@portfolio:~$ availability --status',
-  '> Status: ✅ Open to new opportunities',
-  '> Capacity: 2-3 projects per quarter',
-  '> Remote: Fully available',
-  '> Timezone: Flexible (4hr overlap with US/EU)',
-  '> Start Date: Within 2 weeks',
+  `> Status: ✅ ${portfolioContent.identity.availability}`,
+  '> Remote: Singapore / India • remote-ready',
+  '> Working style: Async-friendly with deliberate review points',
   '',
   'anup@portfolio:~$ engagement --models',
-  '> Project-based: Fixed scope & timeline',
-  '> Retainer: Ongoing support & development',
-  '> Consulting: Architecture & code review',
-  '',
-  'anup@portfolio:~$ response --guarantee',
-  '> Initial reply: Within 24 hours',
-  '> Proposal: Within 48-72 hours',
+  '> Principal / staff roles: Platform, AI, data, and architecture',
+  '> Advisory: Architecture, modernization, and AI delivery controls',
+  '> Collaboration: Scope the outcome before choosing the engagement shape',
   '',
   'anup@portfolio:~$ _',
 ]
@@ -33,7 +28,8 @@ export default function ContactTerminal(){
   const [currentLine, setCurrentLine] = useState(0)
   const [isTyping] = useState(true)
   const [formData, setFormData] = useState({ name: '', email: '', company: '', projectType: '', message: '' })
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isPreparing, setIsPreparing] = useState(false)
+  const [handoffMessage, setHandoffMessage] = useState('')
 
   useEffect(() => {
     if (currentLine < contactCommands.length && isTyping) {
@@ -47,12 +43,22 @@ export default function ContactTerminal(){
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
+    setIsPreparing(true)
+    setHandoffMessage('')
+    const subject = formData.projectType ? `Portfolio inquiry: ${formData.projectType}` : 'Portfolio inquiry'
+    const body = [
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      `Company: ${formData.company || 'Not provided'}`,
+      `Project type: ${formData.projectType || 'Not specified'}`,
+      '',
+      formData.message,
+    ].join('\n')
+    window.location.href = `mailto:${portfolioContent.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
     setTimeout(() => {
-      setIsSubmitting(false)
-      alert("Message sent! I'll get back to you within 24 hours.")
-      setFormData({ name: '', email: '', company: '', projectType: '', message: '' })
-    }, 1500)
+      setIsPreparing(false)
+      setHandoffMessage('Your email client should now have a draft ready. This page does not claim delivery.')
+    }, 400)
   }
 
   return (
@@ -60,7 +66,7 @@ export default function ContactTerminal(){
       <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-12">
         <h2 className="text-4xl md:text-6xl font-bold mb-6 glow-text">$ ./contact_me.sh</h2>
         <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-          Ready to <span className="text-green-400 font-bold">scale your Java backend</span> or architect your next system?
+          Ready to <span className="text-green-400 font-bold">modernize a platform</span> or introduce AI with the right guardrails?
         </p>
         
         {/* Quick Stats */}
@@ -71,9 +77,9 @@ export default function ContactTerminal(){
           transition={{ delay: 0.3 }}
         >
           {[
-            { icon: Clock, text: '24hr Response', color: 'text-green-400' },
-            { icon: Globe, text: 'Remote Ready', color: 'text-blue-400' },
-            { icon: CheckCircle, text: 'Available Now', color: 'text-yellow-400' },
+            { icon: Clock, text: 'Async-friendly', color: 'text-green-400' },
+            { icon: Globe, text: 'Remote-ready', color: 'text-blue-400' },
+            { icon: CheckCircle, text: 'Evidence-led', color: 'text-yellow-400' },
           ].map((item, i) => (
             <motion.div 
               key={item.text}
@@ -108,15 +114,13 @@ export default function ContactTerminal(){
           WhatsApp (Fastest)
         </motion.a>
         <motion.a 
-          href="https://calendly.com"
-          target="_blank"
-          rel="noopener noreferrer"
+          href={`mailto:${portfolioContent.contact.email}?subject=Architecture%20conversation%20request`}
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.95 }}
           className="flex items-center gap-2 border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-black font-bold px-6 py-3 rounded-lg transition-colors"
         >
           <Calendar className="w-5 h-5" />
-          Schedule a Call
+          Request a Call
         </motion.a>
         <motion.a 
           href="mailto:davinanup@gmail.com?subject=Project%20Inquiry%20from%20Portfolio"
@@ -182,7 +186,7 @@ export default function ContactTerminal(){
                 <Zap className="w-6 h-6 text-yellow-400" />
                 Start a Conversation
               </h3>
-              <p className="text-gray-400 mt-1">Tell me about your project—I'll respond within 24 hours</p>
+          <p className="text-gray-400 mt-1">Tell me about the outcome you need. This form prepares an email draft on your device.</p>
             </div>
             <div className="p-6">
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -247,23 +251,24 @@ export default function ContactTerminal(){
                 </div>
                 <motion.button 
                   type="submit" 
-                  disabled={isSubmitting}
+                  disabled={isPreparing}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="w-full bg-green-600 hover:bg-green-500 disabled:bg-green-800 text-black font-bold text-lg py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
                 >
-                  {isSubmitting ? (
+                  {isPreparing ? (
                     <>
                       <motion.span animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1 }}>⏳</motion.span>
-                      Sending...
+                      Opening email draft...
                     </>
                   ) : (
                     <>
                       <Mail className="w-5 h-5" />
-                      Send Message
+                      Open Email Draft
                     </>
                   )}
                 </motion.button>
+                {handoffMessage && <p className="text-sm text-cyan-300 border border-cyan-400/20 bg-cyan-400/5 rounded-lg p-3">{handoffMessage}</p>}
               </form>
             </div>
           </div>
@@ -278,10 +283,10 @@ export default function ContactTerminal(){
         transition={{ delay: 0.5 }}
       >
         {[
-          { icon: Linkedin, label: 'LinkedIn', handle: 'anup-davin-mathivanan', href: 'https://linkedin.com/in/anup-davin-mathivanan', color: 'hover:border-blue-400 hover:text-blue-400' },
-          { icon: Mail, label: 'Email', handle: 'davinanup@gmail.com', href: 'mailto:davinanup@gmail.com', color: 'hover:border-green-400 hover:text-green-400' },
-          { icon: Phone, label: 'Singapore', handle: '+65 8398 5072', href: 'tel:+6583985072', color: 'hover:border-purple-400 hover:text-purple-400' },
-          { icon: Phone, label: 'India', handle: '+91 95004 99143', href: 'tel:+919500499143', color: 'hover:border-cyan-400 hover:text-cyan-400' },
+          { icon: Linkedin, label: 'LinkedIn', handle: 'anup-davin-mathivanan', href: portfolioContent.contact.linkedin, color: 'hover:border-blue-400 hover:text-blue-400' },
+          { icon: Mail, label: 'Email', handle: portfolioContent.contact.email, href: `mailto:${portfolioContent.contact.email}`, color: 'hover:border-green-400 hover:text-green-400' },
+          { icon: Phone, label: 'Singapore', handle: portfolioContent.contact.singaporePhone, href: 'tel:+6583985072', color: 'hover:border-purple-400 hover:text-purple-400' },
+          { icon: Phone, label: 'India', handle: portfolioContent.contact.indiaPhone, href: 'tel:+919500499143', color: 'hover:border-cyan-400 hover:text-cyan-400' },
         ].map((contact, i) => (
           <motion.a 
             key={contact.handle}
@@ -317,13 +322,13 @@ export default function ContactTerminal(){
             System.out.println("Thanks for visiting my portfolio!");
           </motion.div>
           <p className="text-gray-300 mb-6">
-            Whether you need to <span className="text-green-400">scale a system</span>, 
-            <span className="text-blue-400"> migrate to microservices</span>, or 
-            <span className="text-purple-400"> optimize performance</span>—let's talk.
+            Whether you need to <span className="text-green-400">modernize a platform</span>,
+            <span className="text-blue-400"> make data more trustworthy</span>, or
+            <span className="text-purple-400"> introduce AI with guardrails</span>—let's talk.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <motion.a 
-              href="https://wa.me/6583985072"
+              href={portfolioContent.contact.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
@@ -344,4 +349,3 @@ export default function ContactTerminal(){
     </div>
   )
 }
-

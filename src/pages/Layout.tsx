@@ -19,8 +19,9 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
               {[
                 { label: 'Home', href: '#hero' },
                 { label: 'About', href: '#about' },
-                { label: 'Skills', href: '#skills' },
-                { label: 'Projects', href: '#projects' },
+                { label: 'Capabilities', href: '#skills' },
+                { label: 'Case Studies', href: '#projects' },
+                { label: 'AI Lab', href: '#ai-lab' },
                 { label: 'Experience', href: '#experience' },
                 { label: 'Contact', href: '#contact' },
               ].map((link) => (
@@ -29,7 +30,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
                 </a>
               ))}
             </div>
-            <div className="text-sm text-gray-500">$ whoami</div>
+            <div className="text-sm text-gray-500">$ principal-architect</div>
           </div>
         </div>
       </nav>
@@ -68,4 +69,3 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
     </div>
   )
 }
-

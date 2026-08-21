@@ -1,31 +1,28 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Terminal, Download, Database, Server, MessageCircle, CheckCircle, TrendingUp, Shield } from 'lucide-react'
+import { Terminal, Download, Database, Server, MessageCircle, CheckCircle, Shield } from 'lucide-react'
+import { portfolioContent } from '@/content/portfolio'
 
 const codeLines = [
-  'public class FullStackDeveloper {',
-  '    private String name = "Anup Davin Mathivanan";',
-  '    private int yearsExperience = 8;',
-  '    private List<String> expertise = Arrays.asList(',
-  '        "Spring Boot", "Microservices", "React",',
-  '        "AWS", "Docker", "Kubernetes"',
-  '    );',
+  'public final class PlatformArchitect {',
+  '    private final String focus = "AI + Data + Platforms";',
+  '    private final String runtime = "Java 21/25 + Kubernetes";',
   '    ',
-  '    // Results delivered for clients',
-  '    public void buildScalableSystems() {',
-  '        achieve("99.9% uptime");',
-  '        achieve("40% cost reduction");',
-  '        achieve("10K+ requests/second");',
+  '    // Build systems people can trust',
+  '    public void deliver() {',
+  '        modernize();',
+  '        evaluate();',
+  '        observe();',
   '    }',
-  '}'
+'}'
 ]
 
-// Client-focused value propositions
-const VALUE_PROPS = [
-  { icon: TrendingUp, text: '99.9% uptime systems', color: 'text-green-400' },
-  { icon: Shield, text: '40% cost reduction', color: 'text-blue-400' },
-  { icon: CheckCircle, text: '100K+ daily transactions', color: 'text-purple-400' },
-]
+const proofIcons = [CheckCircle, Database, Server, Shield] as const
+const VALUE_PROPS = portfolioContent.proofPoints.map((point, index) => ({
+  ...point,
+  icon: proofIcons[index],
+  text: `${point.value} ${point.label}`,
+}))
 
 export default function TerminalHero(){
   const [displayedCode, setDisplayedCode] = useState<string[]>([''])
@@ -65,10 +62,10 @@ export default function TerminalHero(){
               className="inline-flex items-center gap-2 text-sm bg-green-900/30 text-green-400 px-3 py-1 rounded-full border border-green-400/30"
             >
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-              Available for new projects
+              {portfolioContent.identity.availability}
             </motion.div>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="text-blue-400 text-lg md:text-xl font-mono">
-              $ ./hire --senior-engineer
+              $ ./hire --principal-platform-architect
             </motion.div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
               <span className="text-white">Anup Davin</span>
@@ -84,9 +81,10 @@ export default function TerminalHero(){
             <div className="text-lg md:text-xl text-gray-300 space-y-2">
               <div className="flex items-center gap-2">
                 <span className="text-green-400">❯</span>
-                <span>Senior Full-Stack Java Architect</span>
+                <span>{portfolioContent.identity.headline}</span>
               </div>
-              <div className="text-purple-400 text-base">// Enterprise Systems • Microservices • Cloud & DevOps</div>
+              <div className="text-purple-400 text-base">// {portfolioContent.identity.roleLine}</div>
+              <div className="text-gray-400 text-sm md:text-base">// {portfolioContent.identity.subline}</div>
             </div>
           </div>
           
@@ -131,10 +129,10 @@ export default function TerminalHero(){
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-black font-bold px-5 py-3 rounded-lg flex items-center gap-2 transition-colors" 
-              href="#"
+              href={`mailto:${portfolioContent.contact.email}?subject=Resume%20request%20from%20portfolio`}
             >
               <Download className="w-5 h-5" />
-              Download Resume
+              Request Résumé
             </motion.a>
           </motion.div>
           
@@ -147,11 +145,11 @@ export default function TerminalHero(){
           >
             <div className="flex items-center gap-2">
               <CheckCircle className="w-4 h-4 text-green-400" />
-              <span>8+ years enterprise experience</span>
+              <span>{portfolioContent.proofPoints[0].value} {portfolioContent.proofPoints[0].label}</span>
             </div>
             <div className="flex items-center gap-2">
               <span>📍</span>
-              <span>Singapore / India • Remote Ready</span>
+              <span>{portfolioContent.identity.location}</span>
             </div>
           </motion.div>
         </motion.div>
@@ -171,7 +169,7 @@ export default function TerminalHero(){
               </div>
               <div className="ml-4 flex items-center gap-2">
                 <Terminal className="w-4 h-4 text-green-400" />
-                <span className="text-gray-400 text-sm font-mono">Developer.java</span>
+                <span className="text-gray-400 text-sm font-mono">PlatformArchitect.java</span>
               </div>
             </div>
             <div className="text-xs md:text-sm font-mono space-y-0.5 overflow-x-auto">
@@ -212,12 +210,7 @@ export default function TerminalHero(){
         transition={{ duration: 0.8, delay: 0.3 }} 
         className="mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto"
       >
-        {[
-          { label: 'Years Experience', value: '8+', color: 'text-green-400' },
-          { label: 'Projects Deployed', value: '50+', color: 'text-blue-400' },
-          { label: 'Lines of Code', value: '1M+', color: 'text-purple-400' },
-          { label: 'Client Satisfaction', value: '100%', color: 'text-yellow-400' },
-        ].map((stat, i) => (
+        {portfolioContent.proofPoints.map((stat, i) => (
           <motion.div 
             key={stat.label} 
             initial={{ opacity: 0, scale: 0.8 }}
@@ -241,4 +234,3 @@ export default function TerminalHero(){
     </div>
   )
 }
-

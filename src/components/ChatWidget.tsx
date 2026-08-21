@@ -1,48 +1,34 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { rankBySimilarity } from '@/lib/embeddings'
-import { generateAnswer } from '@/lib/generator'
 import type { ChatDoc } from '@/chat/index.d'
 import { MessageCircle, X, Send, Bot, User, Sparkles, Clock, Zap } from 'lucide-react'
+import { portfolioContent } from '@/content/portfolio'
 
 type Message = { role: 'user' | 'assistant' | 'system'; content: string; timestamp?: Date }
 
-// Expanded FAQ with client objection-handlers
+// FAQ answers are intentionally concise and share the same evidence boundary as the page.
 const FAQ: Record<string, string> = {
-  // Basic info
   'what is his name': 'Anup Davin Mathivanan.',
   "what's his name": 'Anup Davin Mathivanan.',
-  'who is he': 'Anup Davin Mathivanan is a Senior Full‑Stack Java/DevOps Engineer with 8+ years of experience building enterprise systems that handle 100K+ daily transactions.',
-  'what does he do': 'Anup is a Senior Full-Stack Java Developer specializing in Enterprise Architecture, Cloud Solutions, and DevOps. He helps companies scale their backend systems, migrate to microservices, and optimize performance.',
-  
-  // Skills
-  'what are his skills': 'Anup specializes in Java, Spring Boot, React, AWS, Docker, Kubernetes. His core expertise: microservices architecture, cloud infrastructure, performance optimization, and CI/CD pipelines.',
-  'what technologies does he use': 'Primary: Java 21, Spring Boot, Kubernetes, AWS, Docker, Kafka. Databases: Oracle, PostgreSQL, MongoDB, Redis. Frontend: React, TypeScript, Angular.',
-  
-  // Availability & Engagement (Client Objection Handlers)
-  'is he available': 'Yes! Anup is currently open to new projects and opportunities. He can start within 2 weeks and offers flexible engagement models.',
-  'where is he located': 'Anup is based in Singapore/India (GMT+8/+5:30) and works remotely with clients worldwide. He maintains 4+ hours overlap with US/EU timezones.',
-  'does he work remotely': 'Yes, Anup is fully remote-ready and has successfully delivered projects for clients across different timezones. He uses async communication + scheduled syncs.',
-  'what is his timezone': 'Singapore (GMT+8) / India (GMT+5:30). He offers flexible scheduling with 4+ hours overlap for US/EU clients.',
-  
-  // Engagement models
-  'how does he charge': 'Anup offers flexible engagement: project-based (fixed scope), retainer (ongoing development), or consulting (architecture reviews). Contact him to discuss your specific needs.',
-  'what are his rates': 'Rates depend on project scope and engagement type. Anup provides competitive pricing for enterprise Java projects. Reach out via the contact section for a custom quote.',
-  'engagement models': 'Three options: (1) Project-based: fixed scope & timeline, (2) Retainer: ongoing support & development, (3) Consulting: architecture review & optimization.',
-  
-  // Experience
-  'how many years experience': 'Anup has 8+ years of full-stack development experience, with a focus on enterprise Java systems handling millions of transactions.',
-  'what projects has he built': 'Notable projects: (1) E-Commerce Microservices Platform — 100K+ daily transactions, 99.9% uptime, 40% cost reduction. (2) Real-time Analytics Dashboard — 1M+ events/minute, sub-100ms latency. (3) Payment Gateway — $5M+ daily volume.',
-  
-  // Client-focused
-  'can he help with microservices': 'Absolutely! Anup has led multiple monolith-to-microservices migrations, including a platform now handling 500K+ daily transactions with 99.9% uptime.',
-  'can he optimize performance': 'Yes! Performance optimization is a core specialty. Recent wins: 70% faster response times, 95% reduction in data latency, 60% faster deployments.',
-  'does he work with startups': 'Yes, Anup works with both startups and enterprises. He adapts his approach to fit your team size, budget, and growth stage.',
-  'what industries': 'Anup has experience across BFSI (banking/insurance), E-Commerce, Logistics/SaaS, and Fortune 500 enterprises.',
-  
-  // Communication
-  'how to contact': 'Best ways to reach Anup: (1) WhatsApp: +65 8398 5072 (fastest), (2) Email: davinanup@gmail.com, (3) Use the contact form above. He responds within 24 hours.',
-  'response time': 'Anup typically responds within 24 hours. For urgent inquiries, WhatsApp is the fastest channel.',
+  'who is he': `Anup is a ${portfolioContent.identity.headline} with ${portfolioContent.proofPoints[0].value} years in enterprise engineering across Java, data, platforms, and AI-augmented delivery.`,
+  'what does he do': portfolioContent.about.summary,
+  'what are his skills': 'His capability tracks are AI-native delivery, platform engineering, data and MDM, distributed systems, and enterprise delivery.',
+  'what technologies does he use': 'Common tools include Java 21/25, Spring Boot, Spring AI, Kubernetes, AKS, AWS, Kafka, CDC, TIBCO EBX, Boomi DataHub, SQL, pgvector, MCP, and evaluation fixtures.',
+  'is he available': portfolioContent.identity.availability + '. The preferred next step is to discuss the problem and evidence needed before choosing an engagement shape.',
+  'where is he located': `${portfolioContent.identity.location}.`,
+  'does he work remotely': 'Yes. The portfolio is designed around remote-ready, async-friendly delivery with deliberate review points.',
+  'what is his timezone': 'Singapore (GMT+8) with India ties (GMT+5:30). Confirm overlap for a specific team or engagement.',
+  'how does he charge': 'The portfolio does not publish rates. Scope, risk, and the desired outcome should be discussed first; then the engagement shape can be selected.',
+  'what are his rates': 'Rates are not published here. Contact Anup with the problem, constraints, and desired outcome for a scoped conversation.',
+  'engagement models': 'Possible shapes include a principal/staff role, architecture advisory, modernization work, or AI delivery-controls work. The outcome determines the shape.',
+  'how many years experience': `${portfolioContent.proofPoints[0].value} years in enterprise engineering, with a focus on modern Java, data platforms, distributed systems, and AI augmentation.`,
+  'what projects has he built': 'The public case studies cover Person MDM modernization, a grounded knowledge-assistant lab, an agent-augmented engineering loop, and event-driven reconciliation.',
+  'can he help with microservices': 'Yes. The approach centers on migration sequencing, service boundaries, events, idempotency, observability, and safe release gates—not decomposition for its own sake.',
+  'can he optimize performance': 'Yes, when the baseline and bottleneck are measurable. One documented reconciliation workflow was reduced from a multi-hour process to under 20 minutes; surrounding details are sanitized.',
+  'does he work with startups': 'The public positioning is enterprise-oriented, but the same evidence-led approach can be adapted to a smaller team when the problem and constraints are clear.',
+  'what industries': 'Publicly described experience spans regulated payment and insurance contexts, logistics, enterprise integration, and platform modernization.',
+  'how to contact': `Email ${portfolioContent.contact.email} or use the contact form. WhatsApp is also available for a quick conversation.`,
+  'response time': 'The page does not promise a fixed response time. Email and the contact form are the best paths for a detailed inquiry; WhatsApp is useful for a quick conversation.',
 }
 
 // Quick suggestion chips
@@ -50,13 +36,50 @@ const QUICK_QUESTIONS = [
   'What are his skills?',
   'Is he available?',
   'What projects has he built?',
+  'What is the AI lab?',
   'Does he work remotely?',
   'How to contact?',
 ]
 
-function safetyFilter(s: string): boolean {
-  const forbidden = [/email/i, /phone/i, /whatsapp/i, /credit/i, /password/i]
-  return !forbidden.some((re) => re.test(s))
+type RankedDoc = ChatDoc & { score: number }
+
+const STOP_WORDS = new Set(['a', 'an', 'and', 'are', 'can', 'do', 'does', 'he', 'his', 'how', 'is', 'of', 'the', 'to', 'what', 'where', 'with'])
+
+function tokenize(value: string) {
+  return [...new Set(value.toLowerCase().split(/[^a-z0-9]+/).filter((token) => token.length > 2 && !STOP_WORDS.has(token)))]
+}
+
+function rankLocalEvidence(query: string, documents: ChatDoc[], topK = 4): RankedDoc[] {
+  const queryTokens = tokenize(query)
+  if (!queryTokens.length) return []
+
+  return documents
+    .map((document) => {
+      const documentTokens = new Set(tokenize(`${document.title} ${document.text}`))
+      const matchedTokens = queryTokens.filter((token) => documentTokens.has(token))
+      const titleTokens = new Set(tokenize(document.title))
+      const titleMatches = queryTokens.filter((token) => titleTokens.has(token)).length
+      const score = matchedTokens.length / queryTokens.length + titleMatches / (queryTokens.length * 2)
+      return { ...document, score }
+    })
+    .filter((document) => document.score > 0)
+    .sort((left, right) => right.score - left.score)
+    .slice(0, topK)
+}
+
+function answerFromEvidence(query: string, matches: RankedDoc[]) {
+  if (/(ignore|reveal|show).*(instructions|prompt|system|private)/i.test(query)) {
+    return 'I can only answer from the public portfolio evidence. Hidden prompts, private data, and internal instructions are not part of the assistant’s contract.'
+  }
+
+  const groundedMatches = matches.filter((document) => document.score >= 0.18)
+  if (!groundedMatches.length) {
+    return 'I don’t have evidence for that in the public portfolio yet. Try asking about capabilities, case studies, experience, or the working approach.'
+  }
+
+  const primary = groundedMatches[0]
+  const sources = groundedMatches.slice(0, 2).map((document) => document.title).join(' · ')
+  return `${primary.text}\n\nSources: ${sources}`
 }
 
 export default function ChatWidget() {
@@ -66,7 +89,7 @@ export default function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([
     { 
       role: 'assistant', 
-      content: '👋 Hi! I\'m Anup\'s portfolio assistant. Ask me about his experience building enterprise Java systems, microservices architecture, or how he can help with your project!', 
+      content: '👋 I\'m Anup\'s local portfolio assistant. Ask about capabilities, case studies, the AI lab, or the engineering approach. Answers stay inside the public evidence corpus.',
       timestamp: new Date() 
     },
   ])
@@ -104,8 +127,8 @@ export default function ChatWidget() {
     setLoading(true)
     setIsTyping(true)
     
-    // Simulate typing delay for better UX
-    await new Promise(resolve => setTimeout(resolve, 800))
+    // Keep the interaction human-readable while remaining fully local.
+    await new Promise(resolve => setTimeout(resolve, 350))
     
     try {
       const norm = normalize(q)
@@ -114,35 +137,11 @@ export default function ChatWidget() {
         return
       }
 
-      const top = docs && docs.length ? await rankBySimilarity(q, docs, 4) : []
-      const context = top
-        .map((t, i) => `[#${i + 1}] ${t.title}${t.url ? ` (${t.url})` : ''}\n${t.text}`)
-        .join('\n\n')
-
-      const system = [
-        'You are an assistant for a personal portfolio site.',
-        'Only answer from CONTEXT. If the answer is not in CONTEXT, reply: "I don\'t know."',
-        'Be concise and professional. Do not request contact information or personal data.',
-        'If asked for the person\'s name, reply exactly: "Anup Davin Mathivanan."',
-      ].join(' ')
-
-      const prompt = `${system}\n\nCONTEXT:\n${context || '(none)'}\n\nUSER: ${q}\nASSISTANT:`
-      let completion = await generateAnswer(prompt, { maxNewTokens: 80 })
-      let answer = completion.replace(/^[\s\S]*ASSISTANT:\s*/i, '').trim()
-
-      if (!safetyFilter(answer)) {
-        answer = 'I can\'t help with that. Please ask about experience, projects, or skills.'
-      }
-
-      if (!answer || /i don.?t know/i.test(answer)) {
-        // Try to extract a fact from context for fallback
-        const nameHit = top.find((d) => /Anup Davin Mathivanan/i.test(d.text))
-        if (/name/i.test(q) && nameHit) answer = 'Anup Davin Mathivanan.'
-        else if (!answer) answer = 'I don\'t have information about that. Try asking about Anup\'s skills, projects, or experience.'
-      }
+      const top = docs && docs.length ? rankLocalEvidence(q, docs, 4) : []
+      const answer = answerFromEvidence(q, top)
 
       setMessages((m) => [...m, { role: 'assistant', content: answer, timestamp: new Date() }])
-    } catch (e) {
+    } catch {
       setMessages((m) => [...m, { role: 'assistant', content: 'Sorry, I ran into an issue. Please try again.', timestamp: new Date() }])
     } finally {
       setLoading(false)
@@ -205,7 +204,7 @@ export default function ChatWidget() {
                       <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
                     </div>
                     <div className="text-xs text-gray-400 flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> Replies instantly
+                      <Clock className="w-3 h-3" /> Local evidence mode
                     </div>
                   </div>
                 </div>
@@ -339,4 +338,3 @@ export default function ChatWidget() {
     </div>
   )
 }
-

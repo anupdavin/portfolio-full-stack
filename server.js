@@ -2,7 +2,7 @@ import http from 'node:http'
 import fs from 'node:fs'
 import path from 'node:path'
 
-const distDir = path.resolve('./docs')
+const distDir = path.resolve(process.env.LOCAL_SANDBOX === 'true' ? '.local-sandbox/dist' : 'docs')
 
 const server = http.createServer((req, res) => {
   const urlPath = req.url && req.url !== '/' ? req.url.split('?')[0] : '/index.html'
@@ -17,7 +17,15 @@ const server = http.createServer((req, res) => {
       return
     }
     const ext = path.extname(filePath)
-    const type = ext === '.html' ? 'text/html' : ext === '.js' ? 'application/javascript' : ext === '.css' ? 'text/css' : 'application/octet-stream'
+    const typeByExtension = {
+      '.css': 'text/css; charset=utf-8',
+      '.html': 'text/html; charset=utf-8',
+      '.ico': 'image/x-icon',
+      '.js': 'application/javascript; charset=utf-8',
+      '.json': 'application/json; charset=utf-8',
+      '.svg': 'image/svg+xml',
+    }
+    const type = typeByExtension[ext] ?? 'application/octet-stream'
     res.writeHead(200, { 'Content-Type': type })
     res.end(data)
   })
@@ -27,4 +35,3 @@ const port = process.env.PORT ? Number(process.env.PORT) : 5173
 server.listen(port, '0.0.0.0', () => {
   console.log(`Serving docs on http://localhost:${port}`)
 })
-

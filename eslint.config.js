@@ -6,7 +6,9 @@ import tseslint from 'typescript-eslint'
 import { globalIgnores } from 'eslint/config'
 
 export default tseslint.config([
-  globalIgnores(['dist']),
+  // `src/` is the active application. `portfolio-app/` is a preserved
+  // legacy copy and is intentionally excluded from the active quality gate.
+  globalIgnores(['dist', '.local-sandbox', 'portfolio-app']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
