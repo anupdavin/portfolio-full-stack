@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- Three.js is loaded as a runtime ESM module so the landing experience can degrade safely without changing the lockfile. */
 import { useEffect, useRef, useState } from 'react'
 
 const SKILLS = [
