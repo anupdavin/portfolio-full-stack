@@ -5,7 +5,7 @@ import './index.css'
 import Portfolio from './pages/Portfolio.tsx'
 import Layout from './pages/Layout.tsx'
 
-const routeBase = import.meta.env.BASE_URL === './' ? '/' : import.meta.env.BASE_URL
+const routeBase = import.meta.env.BASE_URL.replace(/\/?\.\/$/, '/')
 
 const router = createBrowserRouter([
   {
