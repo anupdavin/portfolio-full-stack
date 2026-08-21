@@ -5,6 +5,8 @@ import './index.css'
 import Portfolio from './pages/Portfolio.tsx'
 import Layout from './pages/Layout.tsx'
 
+const routeBase = import.meta.env.BASE_URL === './' ? '/' : import.meta.env.BASE_URL
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -13,7 +15,7 @@ const router = createBrowserRouter([
       { index: true, element: <Portfolio /> },
     ],
   },
-], { basename: import.meta.env.BASE_URL })
+], { basename: routeBase })
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

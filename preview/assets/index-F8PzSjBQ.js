@@ -273,4 +273,4 @@ Sources: ${u}`}function GM(){const[n,i]=E.useState(!1),[r,s]=E.useState(!1),[u,f
         *::-webkit-scrollbar {
           display: none; /* Chrome, Safari, Opera */
         }
-      `})]})}const KM=U2([{path:"/",element:y.jsx(XM,{}),children:[{index:!0,element:y.jsx(kM,{})}]}],{basename:"./"});V1.createRoot(document.getElementById("root")).render(y.jsx(E.StrictMode,{children:y.jsx(F2,{router:KM})}));
+      `})]})}const KM="/",QM=U2([{path:"/",element:y.jsx(XM,{}),children:[{index:!0,element:y.jsx(kM,{})}]}],{basename:KM});V1.createRoot(document.getElementById("root")).render(y.jsx(E.StrictMode,{children:y.jsx(F2,{router:QM})}));
