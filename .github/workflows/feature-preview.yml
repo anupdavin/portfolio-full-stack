@@ -1,0 +1,50 @@
+name: Feature branch preview
+
+on:
+  push:
+    branches:
+      - feat/ai-native-portfolio-upgrade
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: portfolio-feature-preview
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify local sandbox
+        run: npm run verify:local
+
+      - name: Build feature preview
+        run: npm run build -- --base=/portfolio-full-stack/preview/ai-native/
+
+      - name: SPA fallback
+        run: |
+          cp docs/index.html docs/404.html
+          touch docs/.nojekyll
+
+      - name: Publish isolated preview
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gh-pages
+          destination_dir: preview/ai-native
+          keep_files: true
